@@ -5,4 +5,7 @@ package com.marvel.api.ortal.client;
  */
 public class MarvalThumbnail {
 
+    public String path;
+
+    public String extension;
 }

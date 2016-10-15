@@ -5,4 +5,11 @@ package com.marvel.api.ortal.client;
  */
 public class MarvelResults {
 
+    public int id;
+
+    public String name;
+
+    public MarvalThumbnail thumbnail;
+
+    public String description;
 }

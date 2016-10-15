@@ -29,6 +29,8 @@ import butterknife.ButterKnife;
 public class HistoryFragment extends Fragment implements
         LoaderManager.LoaderCallbacks<Cursor> {
 
+    private static final int LOADER_ID = 1;
+
     @Bind(android.R.id.list)
     HistoryRecyclerView mRecyclerView;
 
@@ -43,7 +45,7 @@ public class HistoryFragment extends Fragment implements
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_history, container, false);
         ButterKnife.bind(this, view);
 
         return view;
@@ -55,12 +57,18 @@ public class HistoryFragment extends Fragment implements
         initializeView();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().getSupportLoaderManager().getLoader(LOADER_ID).forceLoad();
+    }
+
     private void initializeView() {
 
         mLayoutManager = new LinearLayoutManager(getActivity());
         mAdapter = new ListAdapter(getActivity(), (CharacterViewHolder.Listener) getActivity());
         mRecyclerView.init(mLayoutManager, mAdapter);
-        getActivity().getSupportLoaderManager().initLoader(1, null, this);
+        getActivity().getSupportLoaderManager().initLoader(LOADER_ID, null, this);
     }
 
     @Override
@@ -78,7 +86,8 @@ public class HistoryFragment extends Fragment implements
                 results.add(new com.marvel.api.ortal.data.Character(
                         cursor.getString(cursor.getColumnIndex(DbContract.CharacterColumns.NAME)),
                         cursor.getString(cursor.getColumnIndex(DbContract.CharacterColumns.THUMBNAIL)),
-                        cursor.getString(cursor.getColumnIndex(DbContract.CharacterColumns.DESCRIPTION))
+                        cursor.getString(cursor.getColumnIndex(DbContract.CharacterColumns.DESCRIPTION)),
+                        cursor.getInt(cursor.getColumnIndex(DbContract.CharacterColumns._ID))
                 ));
                 cursor.moveToNext();
             }

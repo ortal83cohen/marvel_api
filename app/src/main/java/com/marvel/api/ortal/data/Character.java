@@ -17,17 +17,20 @@ public class Character implements Parcelable {
             return new Character[size];
         }
     };
+
     public String name;
+
     public String thumbnail;
+
     public String description;
 
-    public Character() {
-    }
+    private int id;
 
-    public Character(String name, String thumbnail, String description) {
+    public Character(String name, String thumbnail, String description, int id) {
         this.name = name;
         this.thumbnail = thumbnail;
         this.description = description;
+        this.id = id;
     }
 
     protected Character(Parcel in) {

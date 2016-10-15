@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Marvel Characters</string>
+    <string name="character">Character</string>
+    <string name="show">Show</string>
+    <string name="error_happened">An error happened</string>
+    <string name="name_wrong">The entered name is wrong</string>
+</resources>
